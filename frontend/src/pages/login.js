@@ -23,9 +23,11 @@ const Login = () => {
         dispatch(login(formData))
     }
 
-    useEffect(() => {
-        if (isAuthenticated) router.push("/")
-    }, [isAuthenticated])
+    if (isAuthenticated) router.push("/")
+
+    //useEffect(() => {
+    //    if (isAuthenticated) router.push("/")
+    //}, [isAuthenticated])
 
     return (
        <Layout title="Login Page" content="This is the login page">
