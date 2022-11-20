@@ -1,3 +1,4 @@
+import cookie from "cookie"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import Layout from "../hoc/Layout"
@@ -8,21 +9,20 @@ const Profile = () => {
     const { isAuthenticated, user } = useSelector(state => state.auth)
     const router = useRouter()
 
-    useEffect(() => {
-      if (!isAuthenticated) router.push("/login")
-    },[isAuthenticated])
+    if (typeof window !== "undefined" && !isAuthenticated) {
+        router.push("/login")
+    }
+
+    if (typeof window !== "undefined" && isAuthenticated) {
+        localStorage.setItem("page", "profile")
+    }
     
     return (
         <Layout title="Profile" content="The user profile page">
-            <div className="col-md-12 px-4">
-                <ul>
-                    <li className="pt-1"><b>Username:</b> {user !== null && user.username}</li>
-                    <li className="pt-1"><b>Email:</b> {user !== null && user.email}</li>
-                    <li className="pt-1"><b>Date Joined:</b> {user !== null && user.date_joined}</li>
-                    <li className="pt-1"><b>No. of Posts:</b> 15</li>
-                    <li className="pt-1"><b>No. of Likes:</b> 10</li>
-                </ul>
-            </div>
+           <section className="fs-5 lh-lg">My name is <b>{user != null && user.username}</b>
+           , my email is <b>{user != null && user.email}</b>
+           , and I had joined on <b>{user != null && user.date_joined}</b>
+           </section>
         </Layout>
     )
 }

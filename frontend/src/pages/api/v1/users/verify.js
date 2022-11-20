@@ -19,7 +19,6 @@ export default async (req, res) => {
                 body: JSON.stringify({token: access})
             })
 
-            const data = await apiRes.json()
             if (apiRes.status === 200) return res.status(200).json({success: true})
             else return res.status(apiRes.status).json({error: "Unable to verify the user!"})
         }

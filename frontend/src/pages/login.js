@@ -23,9 +23,13 @@ const Login = () => {
         dispatch(login(formData))
     }
 
-    useEffect(() => {
-        if (isAuthenticated) router.push("/")
-    }, [isAuthenticated])
+    if (isAuthenticated && localStorage.getItem("page") === "home") {
+        router.push("/")
+    }
+    
+    if (isAuthenticated && localStorage.getItem("page") === "profile") {
+        router.push("/profile")
+    }
 
     return (
        <Layout title="Login Page" content="This is the login page">

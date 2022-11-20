@@ -6,12 +6,9 @@ import { checkAuth } from "../features/auth/auth"
 
 const Layout = ({ children, title, content }) => {
 
-    const dispatch = useDispatch()
     const { isAuthenticated } = useSelector(state => state.auth)
-
-    useEffect(() => {
-        dispatch(checkAuth())
-    }, [dispatch])
+    const dispatch = useDispatch()
+    useEffect(() => {dispatch(checkAuth())}, [dispatch])
 
     return (
         <>  
@@ -20,7 +17,7 @@ const Layout = ({ children, title, content }) => {
                 <title>{title}</title>
             </Head>
             {isAuthenticated ? <Navbar /> : null}
-            <main className="row">
+            <main className="container">
                 { children }
             </main>
         </>

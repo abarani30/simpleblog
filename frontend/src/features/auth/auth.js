@@ -54,6 +54,7 @@ export const login = createAsyncThunk('users/login', async(data, thunkAPI) => {
 
         if (res.status === 200) {
             await dispatch(getUser())
+            localStorage.setItem("page", "home")
             return jsonData
         }
         else return rejectWithValue(jsonData)
@@ -80,7 +81,10 @@ export const logout = createAsyncThunk('users/logout', async(_, thunkAPI) => {
 
         const jsonData = await res.json()
 
-        if (res.status === 200) return jsonData
+        if (res.status === 200) {
+            localStorage.removeItem("page")
+            return jsonData
+        }
         else return rejectWithValue(jsonData)
     }
 
