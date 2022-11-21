@@ -1,8 +1,5 @@
 //import styles from '../styles/Home.module.css'
 import Layout from "../hoc/Layout"
-import Posts from "../components/Posts"
-import Statistics from "../components/Statistics"
-import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { useRouter }  from "next/router"
 

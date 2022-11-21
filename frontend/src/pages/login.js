@@ -23,13 +23,21 @@ const Login = () => {
         dispatch(login(formData))
     }
 
-    if (isAuthenticated && localStorage.getItem("page") === "home") {
-        router.push("/")
-    }
-    
+        
     if (isAuthenticated && localStorage.getItem("page") === "profile") {
         router.push("/profile")
     }
+
+    if (
+        isAuthenticated && localStorage.getItem("page") === "home" || 
+        isAuthenticated && !localStorage.getItem("page") ||
+        isAuthenticated && localStorage.getItem("page") !== "home" &&
+        isAuthenticated && localStorage.getItem("page") !== "profile"
+    ) 
+    {
+        router.push("/")
+    }
+    
 
     return (
        <Layout title="Login Page" content="This is the login page">

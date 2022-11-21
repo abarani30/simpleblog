@@ -1,10 +1,12 @@
 import Link from "next/link"
 import { logout } from "../features/auth/auth"
 import { useDispatch, useSelector } from "react-redux"
+import { useRouter } from "next/router"
 
 const Navbar = () => {
 
     const dispatch = useDispatch()
+    const router = useRouter()
     const { isAuthenticated } = useSelector(state => state.auth)
     const logoutUser = () => {
         dispatch(logout())
@@ -14,10 +16,20 @@ const Navbar = () => {
     const authLinks = (
         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
             <li className="nav-item">
-                <Link className="nav-link active" href="/">Home</Link>
+                <Link 
+                    className={router.pathname === "/" ? "nav-link active fw-bold" : "nav-link"} 
+                    href="/"
+                >
+                    Home
+                </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" href="/profile">Profile</Link>
+                <Link 
+                    className={router.pathname === "/profile" ? "nav-link active fw-bold" : "nav-link" }
+                    href="/profile"
+                >
+                    Profile
+                </Link>
             </li>
             <li className="nav-item">
                 <Link className="nav-link" href="#!" onClick={logoutUser}>Logout</Link>
